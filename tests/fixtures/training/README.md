@@ -18,13 +18,13 @@
 | `mystery-ready.html` | Mystery Island Training School | Ready; `Course Finished!` with `Complete Course!` control | `https://www.neopets.com/island/training.phtml?type=status` / Training status | Captured from the current manually opened rendered page; only the finished row retained |
 | `mystery-available.html` | Mystery Island Training School | Available/idle; six visible rows, all `not on a course` | `https://www.neopets.com/island/training.phtml?type=status` / Training status | Captured from the current manually opened rendered page |
 | `multiple-pets.html` | Mystery Island Training School | Six visible rows; one active and five `not on a course` | `https://www.neopets.com/island/training.phtml?type=status` / Training status | Captured from the same manually opened rendered page |
+| `pirate-active.html` | Cap'n Threelegs' Swashbuckling Academy | Active; `Time till course finishes : 7 hrs, 59 minutes, 59 seconds` | `https://www.neopets.com/pirates/academy.phtml?type=status` / Training status | Captured from the current manually opened rendered page; only the active row retained |
 | `pirate-ready.html` | Swashbuckling Academy | Six visible rows; all `not on a course`, no active row, no `Course Finished!` text observed | `https://www.neopets.com/pirates/academy.phtml?type=status` / Training status | Captured from the current manually opened rendered page |
 | `malformed.html` | N/A | Handwritten malformed negative fixture | N/A | Added locally for safe-failure tests; not a site capture |
 
 The following required current captures were not available in the browser during
 this collection and are intentionally not fabricated:
 
-- `pirate-active.html`
 - `ninja-active.html`
 - `ninja-ready.html`
 
@@ -33,8 +33,8 @@ this collection and are intentionally not fabricated:
 - Removed the account header, account name, event text, NP/NC balances,
   inventory/navigation/sidebar content, forms, tracking content, and pet image
   URLs.
-- Replaced every visible pet name with `FixturePetMystery` or
-  `FixturePet01`–`FixturePet06`.
+- Replaced every visible pet name with synthetic `FixturePetMystery`,
+  `FixturePetPirateActive`, or `FixturePet01`–`FixturePet06` names.
 - Replaced visible pet stats with synthetic zero values while retaining the
   status-row/table shape and the observed timer wording/units.
 - No cookie, token, password, Neopass data, email, account identifier, or
@@ -45,12 +45,12 @@ parser work. A **partial** fixture-backed parser may read evidenced states only:
 
 - Mystery active timer rows
 - Mystery `Course Finished!` ready row
+- Pirate active timer row
 - Idle `is not on a course` rows (observed in `mystery-available.html`, `multiple-pets.html`, and `pirate-ready.html`)
 - Malformed negative cases
 
 Still blocked for production completeness:
 
-- `pirate-active.html` (deferred manual capture)
 - Pirate true `Course Finished!` ready fixture; `pirate-ready.html` is idle only
 - all Ninja fixtures (**intentional exclusion** until a Ninja pet exists)
 
