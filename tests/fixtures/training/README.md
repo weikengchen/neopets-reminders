@@ -15,6 +15,7 @@
 | File | School | State | Exact URL / page family | Evidence status |
 | --- | --- | --- | --- | --- |
 | `mystery-active.html` | Mystery Island Training School | Active; `Time till course finishes : 1 hrs, 10 minutes, 45 seconds` | `https://www.neopets.com/island/training.phtml?type=status` / Training status | Captured from the current manually opened rendered page |
+| `mystery-ready.html` | Mystery Island Training School | Ready; `Course Finished!` with `Complete Course!` control | `https://www.neopets.com/island/training.phtml?type=status` / Training status | Captured from the current manually opened rendered page; only the finished row retained |
 | `multiple-pets.html` | Mystery Island Training School | Six visible rows; one active and five `not on a course` | `https://www.neopets.com/island/training.phtml?type=status` / Training status | Captured from the same manually opened rendered page |
 | `pirate-ready.html` | Swashbuckling Academy | Six visible rows; all `not on a course`, no active row, no `Course Finished!` text observed | `https://www.neopets.com/pirates/academy.phtml?type=status` / Training status | Captured from the current manually opened rendered page |
 | `malformed.html` | N/A | Handwritten malformed negative fixture | N/A | Added locally for safe-failure tests; not a site capture |
@@ -23,7 +24,6 @@ The following required current captures were not available in the browser during
 this collection and are intentionally not fabricated:
 
 - `pirate-active.html`
-- `mystery-ready.html`
 - `ninja-active.html`
 - `ninja-ready.html`
 
