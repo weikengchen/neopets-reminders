@@ -16,19 +16,22 @@
 | File | State | Evidence |
 | --- | --- | --- |
 | `available.html` | Available | Contains the rendered Healing Springs message and `Heal my Pets` submit control. |
-| `success-heal.html` | Not captured | Requires a human to click Heal and then expose the rendered result; the capture agent did not click it. |
-| `cooldown.html` | Not captured | No cooldown result was currently rendered. |
+| `success-heal.html` | Not captured | User manually clicked Heal, but the success result was no longer available when captured; no success markup was fabricated. |
+| `cooldown.html` | Cooldown | User manually clicked Heal; the currently rendered page showed `Sorry! - My magic is not fully restored yet. Please try back later.` |
 | `success-shop.html` | Not captured | No shop purchase was performed; the capture agent did not click Buy. |
 
 ## Timer semantics observed
 
-No numeric activity cooldown remaining value was visible in the captured page.
-The only `MM:SS`-like text observed was the site clock (`6:53:42 am NST`),
-not a Healing Springs cooldown. The visible copy is a fixed explanatory
-message, including the limitation to one customer per visit.
+No numeric activity cooldown remaining value was visible in either the
+available or cooldown page. The cooldown state uses fixed copy:
+`Sorry! - My magic is not fully restored yet. Please try back later.` The only
+`MM:SS`-like text observed earlier was the site clock (`6:53:42 am NST`), not a
+Healing Springs cooldown.
 
-This does not validate the proposed `observedAt + 30 minutes` model. A future
-manual success fixture is still required before discussing that design further.
+The user manually clicked Heal, but the success-heal view was not retained
+after the accidental transition to cooldown. This does not validate the
+proposed `observedAt + 30 minutes` model; a future manual success fixture is
+still required before discussing that design further.
 
 ## Sanitization
 
