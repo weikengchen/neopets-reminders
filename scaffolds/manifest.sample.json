@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Neopets Reminders (Development)",
+  "version": "0.0.1",
+  "description": "Local reminder companion for timer information observed on Neopets pages you manually visit.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.neopets.com/pirates/academy.phtml*",
+        "https://www.neopets.com/island/training.phtml*",
+        "https://www.neopets.com/island/fight_training.phtml*"
+      ],
+      "js": ["training-content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
