@@ -16,7 +16,7 @@
 | File | State | Evidence |
 | --- | --- | --- |
 | `available.html` | Available | Contains the rendered Healing Springs message and `Heal my Pets` submit control. |
-| `success-heal.html` | Success | User manually clicked Heal; the rendered dialogue said `All of your Neopets gain three hit points.` and showed the `faerie-battle` Water Faerie scene marker. |
+| `success-heal.html` | Success | User manually clicked Heal; the rendered page showed the Water Faerie success dialogue and a result paragraph. The observed effect sentence is a snapshot, not a fixed marker. |
 | `cooldown.html` | Cooldown | User manually clicked Heal; the currently rendered page showed `Sorry! - My magic is not fully restored yet. Please try back later.` |
 | `success-shop.html` | Not captured | No shop purchase was performed; the capture agent did not click Buy. |
 
@@ -29,7 +29,13 @@ available or cooldown page. The cooldown state uses fixed copy:
 Healing Springs cooldown.
 
 The success-heal fixture now provides evidence of the success event and its
-rendered dialogue/image marker. It does not prove the duration of a cooldown:
+rendered dialogue. The exact result text (`All of your Neopets...`) can vary
+between outcomes, so it must not be used as an exact production selector or
+assertion. The `faerie-battle` class is retained as visual context only; it is
+not treated as the success decision by itself. The useful observed distinction
+is a result dialogue branch (introduced by `The Water Faerie says a few
+magical words and...`) versus the cooldown branch's fixed failure copy. This
+does not prove the duration of a cooldown:
 the cooldown page still uses fixed copy, so the proposed `observedAt + 30
 minutes` model remains a local policy rather than a server numeric value.
 
@@ -38,8 +44,8 @@ minutes` model remains a local policy rather than a server numeric value.
 - Preserved only the page heading, fixed Healing Springs message, and visible
   `Heal my Pets` control.
 - The success fixture preserves the `faerie-battle` class marker observed on
-  the rendered Water Faerie scene; its external CSS background image URL was
-  removed.
+  the rendered Water Faerie scene as provenance/context only; its external CSS
+  background image URL was removed.
 - Removed account chrome, balances, inventory, potion/shop listings and prices,
   hidden form fields, URLs, images, and unrelated navigation.
 - No cookies, tokens, credentials, account identifiers, or real pet names were
