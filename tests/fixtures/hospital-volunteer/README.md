@@ -15,10 +15,10 @@
 
 | File | State | Observation |
 | --- | --- | --- |
+| `available.html` | Available | Two shifts show `Volunteer Time Needed: 03:00:00` and `Join Shift`; neither has `Time Remaining`. |
 | `active.html` | Active | Two visible volunteer rows with `Time Remaining` values `01:17:22` and `01:17:28`; both show `is volunteering!`. |
 | `ready.html` | Ready | Two visible completed rows with `Time Remaining: 00:00:00` and `Collect Prize`; no prize was collected. |
 | `malformed.html` | Negative | Handwritten invalid timer text; not a site capture. |
-| `available.html` | Not captured | No join/available state was manually opened. |
 
 ## Focus and timer reliability
 
@@ -44,8 +44,8 @@ is reliable while focused or backgrounded.
   inline scripts, inline event handlers, data identifiers, and form/navigation
   URLs.
 - Preserved the `vc-fight-details`, `vc-fight-status`, timer digit spans,
-  status text, volunteer text, and visible `Collect Prize` button shape needed
-  for review.
+  available/remaining status text, volunteer text, and visible `Join Shift` /
+  `Collect Prize` button shapes needed for review.
 - No cookies, tokens, credentials, account identifiers, or real pet names were
   saved.
 
