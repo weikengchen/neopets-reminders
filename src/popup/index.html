@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visit Reminders</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1>Visit Reminders</h1>
+      </header>
+
+      <p id="banner" class="banner" role="status" hidden></p>
+      <p id="status-banner" class="status-banner" role="status" hidden></p>
+
+      <section class="list-section" aria-labelledby="support-heading">
+        <h2 id="support-heading">Open</h2>
+        <ul id="support-list" class="support-list"></ul>
+      </section>
+
+      <section class="list-section" aria-labelledby="ready-heading">
+        <h2 id="ready-heading">Ready</h2>
+        <ul id="ready-list" class="reminder-list"></ul>
+        <p id="ready-empty" class="empty" hidden>No ready items.</p>
+      </section>
+
+      <section class="list-section" aria-labelledby="upcoming-heading">
+        <h2 id="upcoming-heading">Upcoming / Cooldown</h2>
+        <ul id="upcoming-list" class="reminder-list"></ul>
+        <p id="upcoming-empty" class="empty" hidden>No upcoming timers.</p>
+      </section>
+
+      <section class="list-section" aria-labelledby="other-heading">
+        <h2 id="other-heading">Other observations</h2>
+        <ul id="other-list" class="reminder-list"></ul>
+        <p id="other-empty" class="empty" hidden>No available/unsupported notes.</p>
+      </section>
+
+      <p id="global-empty" class="empty global-empty" hidden>
+        No observations yet. Open a supported page above after visiting it in
+        Chrome.
+      </p>
+
+      <section class="settings" aria-labelledby="settings-heading">
+        <h2 id="settings-heading">Settings</h2>
+        <label class="toggle">
+          <input type="checkbox" id="training-enabled" />
+          <span>Activity reminders</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="notifications-enabled" />
+          <span>Completion notifications</span>
+        </label>
+        <button type="button" id="test-notification" class="btn secondary">
+          Test Notification
+        </button>
+      </section>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

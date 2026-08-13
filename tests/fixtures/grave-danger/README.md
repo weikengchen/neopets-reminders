@@ -4,37 +4,35 @@
 
 | Field | Value |
 | --- | --- |
-| Capture date | 2026-08-10 |
+| Capture dates | 2026-08-10 (active); 2026-08-13 (end + selection, live navigation) |
 | URL | `https://www.neopets.com/halloween/gravedanger/` |
 | Page family | Explore / Grave Danger |
-| Capture method | User manually opened the rendered page in Chrome; the DOM was read-only inspected. The capture agent did not navigate, send a Petpet, collect a prize, or otherwise create a gameplay state. |
-| Browser | Chrome via the connected read-only browser surface; exact build was not exposed. |
+| Capture method | User manually opened / completed flows in Chrome. Capture was read-only. No agent clicks, Send, or Collect. |
 
 ## Files
 
 | File | State | Evidence |
 | --- | --- | --- |
-| `active.html` | Active | Real rendered page showed a Petpet adventuring, `Status:`, and `Remaining adventuring time: 2 hours, 37 minutes, 1 second`. |
-| `available.html` | Not captured | No available/send-Petpet state was observed in the manually opened page. |
-| `ready.html` | Not captured | No return/finished state was observed. |
-| `no-petpet.html` | Not captured | A Petpet was present in the observed active state; no no-Petpet state was observed. |
+| `active.html` | Active | `#gdAdventure` / `#gdActive` / `#gdRemaining` with remaining-time text |
+| `end.html` | End / reward | Live marker `#gdReward` after zero-reload |
+| `selection.html` | Selection | Live markers `#gdSelection` + POST `#gdForm` |
+| `available.html` | Not captured | Same as selection for product purposes; extra available-only markup not stored |
+| `ready.html` | Not captured | End page uses `#gdReward`; no separate ready fixture name required |
+| `no-petpet.html` | **Not captured** | Must stay unsupported — do not guess |
 
 ## Sanitization
 
-- Replaced the visible Petpet name with `FixturePetpetGD01`.
-- Removed account chrome, balances, inventory, sidebar content, images, image
-  URLs, scripts, inline event handlers, data identifiers, and navigation URLs.
-- Preserved the observed `#gdActive`, `.petpetName`, `.statusTitle`, `#gdTime`,
-  and `#gdRemaining` structure plus the rendered status and remaining-time
-  text.
-- No cookies, tokens, credentials, account identifiers, or real names were
-  saved.
+- Synthetic petpet name on active only (`FixturePetpetGD01`)
+- End/selection keep only confirmed IDs; prize text and options redacted
+- No cookies, tokens, account names, or real petpet names
 
-## Missing states
+## Classification (parser)
 
-Only the active state was available during this read-only capture. The other
-files remain absent rather than being fabricated; a later manual pass may add
-them when the rendered states are genuinely observed.
+| Kind | Markers | Message |
+| --- | --- | --- |
+| active | `#gdAdventure` or `#gdActive` + parseable remaining | one snapshot |
+| end | `#gdReward` | empty + `replaceScope` |
+| selection | `#gdSelection` and POST `#gdForm` | empty + `replaceScope` |
+| unknown / no-petpet | none of the above | **do not** clear scope |
 
-Grave Danger is approved for V1 in `02-feature-whitelist.md`, but its fixture
-gate remains open until the remaining states can be read and sanitized.
+Send and zero are full navigations; content script reinjects. `#gdRemaining` first write is delayed (~1s interval, no immediate tick).

@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Visit Reminders",
+  "version": "1.0.0",
+  "description": "Local countdown reminders for timers on pages you already open. It does not play or automate the game.",
+  "permissions": ["storage", "alarms", "notifications"],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Visit Reminders",
+    "default_icon": {
+      "16": "assets/icon-16.png",
+      "32": "assets/icon-32.png",
+      "48": "assets/icon-48.png",
+      "128": "assets/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icon-16.png",
+    "32": "assets/icon-32.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.neopets.com/pirates/academy.phtml*",
+        "https://www.neopets.com/island/training.phtml*",
+        "https://www.neopets.com/island/fight_training.phtml*",
+        "https://www.neopets.com/hospital/volunteer.phtml*",
+        "https://www.neopets.com/halloween/gravedanger/*",
+        "https://www.neopets.com/faerieland/springs.phtml*",
+        "https://www.neopets.com/desert/shrine.phtml*",
+        "https://ncmall.neopets.com/mall/shop.phtml*"
+      ],
+      "js": ["observe-content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

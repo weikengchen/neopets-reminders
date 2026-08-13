@@ -4,7 +4,7 @@
 
 | Field | Value |
 | --- | --- |
-| Capture date | 2026-08-10 |
+| Capture date | 2026-08-10 (prior captures); 2026-08-11 (`pirate-ready.html`) |
 | Capture method | User manually opened an already logged-in Chrome tab; the rendered DOM was read-only inspected and reduced to small local fragments. This was not automated scraping. |
 | Browser | Chrome via the connected read-only browser surface; exact browser build was not exposed. |
 | Site/version note | The rendered page had no explicit site version label; the page footer showed the current 2026 copyright line. |
@@ -19,7 +19,7 @@
 | `mystery-available.html` | Mystery Island Training School | Available/idle; six visible rows, all `not on a course` | `https://www.neopets.com/island/training.phtml?type=status` / Training status | Captured from the current manually opened rendered page |
 | `multiple-pets.html` | Mystery Island Training School | Six visible rows; one active and five `not on a course` | `https://www.neopets.com/island/training.phtml?type=status` / Training status | Captured from the same manually opened rendered page |
 | `pirate-active.html` | Cap'n Threelegs' Swashbuckling Academy | Active; `Time till course finishes : 7 hrs, 59 minutes, 59 seconds` | `https://www.neopets.com/pirates/academy.phtml?type=status` / Training status | Captured from the current manually opened rendered page; only the active row retained |
-| `pirate-ready.html` | Swashbuckling Academy | Six visible rows; all `not on a course`, no active row, no `Course Finished!` text observed | `https://www.neopets.com/pirates/academy.phtml?type=status` / Training status | Captured from the current manually opened rendered page |
+| `pirate-ready.html` | Swashbuckling Academy | One visible row; `Course Finished!` with `Complete Course!` control for a Strength course | `https://www.neopets.com/pirates/academy.phtml?type=status` / Training status | Captured from the current manually opened rendered page on 2026-08-11; only the finished row retained |
 | `malformed.html` | N/A | Handwritten malformed negative fixture | N/A | Added locally for safe-failure tests; not a site capture |
 
 The following required current captures were not available in the browser during
@@ -46,16 +46,16 @@ parser work. A **partial** fixture-backed parser may read evidenced states only:
 - Mystery active timer rows
 - Mystery `Course Finished!` ready row
 - Pirate active timer row
-- Idle `is not on a course` rows (observed in `mystery-available.html`, `multiple-pets.html`, and `pirate-ready.html`)
+- Pirate `Course Finished!` ready row
+- Idle `is not on a course` rows (observed in `mystery-available.html` and `multiple-pets.html`)
 - Malformed negative cases
 
 Still blocked for production completeness:
 
-- Pirate true `Course Finished!` ready fixture; `pirate-ready.html` is idle only
 - all Ninja fixtures (**intentional exclusion** until a Ninja pet exists)
 
 `TRAINING_FIXTURE_GATE_COMPLETE` stays `false` until the allowed fixture set is complete.
-Do not treat `pirate-ready.html` as `Course Finished!` — it is idle not-on-a-course only.
+The Pirate ready fixture is now real `Course Finished!` evidence; Ninja remains intentionally excluded.
 
 ## Timer semantics (observed)
 
