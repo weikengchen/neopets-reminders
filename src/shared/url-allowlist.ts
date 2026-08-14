@@ -21,7 +21,8 @@ export type PageClass =
   | { kind: 'grave-danger' }
   | { kind: 'healing-springs' }
   | { kind: 'coltzan' }
-  | { kind: 'expellibox' };
+  | { kind: 'expellibox' }
+  | { kind: 'meteor' };
 
 export function canonicalTrainingUrl(school: TrainingSchool): string {
   return `https://${HOST_WWW}${SCHOOL_PATHS[school]}?type=status`;
@@ -44,6 +45,8 @@ export function canonicalUrlForKind(
       return `https://${HOST_WWW}/desert/shrine.phtml`;
     case 'expellibox':
       return `https://${HOST_NCMALL}/mall/shop.phtml?page=giveaway`;
+    case 'meteor':
+      return `https://${HOST_WWW}/moon/meteor.phtml`;
   }
 }
 
@@ -109,6 +112,10 @@ export function classifyPageUrl(urlString: string): PageClass | null {
 
   if (path === '/desert/shrine' || url.pathname === '/desert/shrine.phtml') {
     return { kind: 'coltzan' };
+  }
+
+  if (path === '/moon/meteor' || url.pathname === '/moon/meteor.phtml') {
+    return { kind: 'meteor' };
   }
 
   return null;

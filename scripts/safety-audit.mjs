@@ -160,6 +160,7 @@ const ALLOWED_MATCHES = new Set([
   'https://www.neopets.com/halloween/gravedanger/*',
   'https://www.neopets.com/faerieland/springs.phtml*',
   'https://www.neopets.com/desert/shrine.phtml*',
+  'https://www.neopets.com/moon/meteor.phtml*',
   'https://ncmall.neopets.com/mall/shop.phtml*',
 ]);
 const FORBIDDEN_PERMS = [

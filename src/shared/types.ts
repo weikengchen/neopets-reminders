@@ -6,7 +6,8 @@ export type ReminderKind =
   | 'grave-danger'
   | 'healing-springs'
   | 'coltzan'
-  | 'expellibox';
+  | 'expellibox'
+  | 'meteor';
 
 /** Alarm/completion lifecycle */
 export type ReminderStatus = 'scheduled' | 'ready';
@@ -40,6 +41,8 @@ export interface ReminderRecord {
   timerQuality: TimerQuality;
   /** Short redacted note for UI (e.g. estimate policy) */
   sourceNote?: string;
+  /** Meteor: won a prize this NST day (locks until midnight NST). */
+  prizeWonToday?: boolean;
   parserVersion: 1;
   generation: number;
   notifiedGeneration?: number;
@@ -80,6 +83,7 @@ export interface ActivityObservation {
   activityStatus: ActivityUiStatus;
   timerQuality: TimerQuality;
   sourceNote?: string;
+  prizeWonToday?: boolean;
   parserVersion: 1;
   /** Stable id fragment after kind prefix, built by parser helpers */
   idKey: string;
@@ -120,6 +124,7 @@ export const KIND_LABELS: Record<ReminderKind, string> = {
   'healing-springs': 'Healing Springs',
   coltzan: "Coltzan's Shrine",
   expellibox: 'Qasalan Expellibox',
+  meteor: 'Meteor Crash Site',
 };
 
 /** Conservative max future duration for validation (30 days). */

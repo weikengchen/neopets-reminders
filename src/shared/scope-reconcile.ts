@@ -10,7 +10,8 @@ export type ObservationScope =
   | { kind: 'grave-danger' }
   | { kind: 'healing-springs' }
   | { kind: 'coltzan' }
-  | { kind: 'expellibox' };
+  | { kind: 'expellibox' }
+  | { kind: 'meteor' };
 
 export function observationId(obs: ActivityObservation): string {
   return `${obs.kind}:${obs.idKey}`;

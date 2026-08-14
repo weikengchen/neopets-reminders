@@ -47,9 +47,36 @@ export function applyActivityObservation(
     base.contextLabel = observation.contextLabel;
   if (observation.sourceNote !== undefined)
     base.sourceNote = observation.sourceNote;
+  if (observation.prizeWonToday !== undefined)
+    base.prizeWonToday = observation.prizeWonToday;
 
   if (!existing) {
     return { action: 'upsert', record: base };
+  }
+
+  // Prize day-lock wins over a shorter visit cooldown
+  if (
+    observation.kind === 'meteor' &&
+    observation.prizeWonToday === true
+  ) {
+    // fall through to material merge below
+  } else if (
+    observation.kind === 'meteor' &&
+    existing.prizeWonToday === true &&
+    existing.status === 'scheduled' &&
+    existing.dueAt > observation.observedAt
+  ) {
+    return {
+      action: 'upsert',
+      previous: existing,
+      record: {
+        ...existing,
+        observedAt: observation.observedAt,
+        sourceNote:
+          existing.sourceNote ??
+          'Kept prize day-lock until next NST midnight',
+      },
+    };
   }
 
   // Keep fresher fixed-cooldown estimate when re-seeing cooldown page
@@ -57,6 +84,7 @@ export function applyActivityObservation(
     'healing-springs',
     'coltzan',
     'expellibox',
+    'meteor',
   ]);
   if (
     keepEstimateKinds.has(observation.kind) &&
@@ -65,7 +93,8 @@ export function applyActivityObservation(
     existing.kind === observation.kind &&
     existing.timerQuality === 'estimate' &&
     existing.status === 'scheduled' &&
-    existing.dueAt > observation.observedAt
+    existing.dueAt > observation.observedAt &&
+    observation.prizeWonToday !== true
   ) {
     return {
       action: 'upsert',
@@ -122,6 +151,9 @@ export function applyActivityObservation(
     if (note !== undefined) record.sourceNote = note;
     const ctx = observation.contextLabel ?? existing.contextLabel;
     if (ctx !== undefined) record.contextLabel = ctx;
+    if (observation.prizeWonToday !== undefined) {
+      record.prizeWonToday = observation.prizeWonToday;
+    }
     return { action: 'upsert', previous: existing, record };
   }
 
@@ -145,6 +177,9 @@ export function applyActivityObservation(
         : {}),
       ...(observation.sourceNote !== undefined
         ? { sourceNote: observation.sourceNote }
+        : {}),
+      ...(observation.prizeWonToday !== undefined
+        ? { prizeWonToday: observation.prizeWonToday }
         : {}),
     },
   };

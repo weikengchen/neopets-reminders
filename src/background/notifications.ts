@@ -52,6 +52,7 @@ const ALLOWED_OPEN_PREFIXES = [
   'https://www.neopets.com/faerieland/springs.phtml',
   'https://www.neopets.com/desert/shrine.phtml',
   'https://ncmall.neopets.com/mall/shop.phtml?page=giveaway',
+  'https://www.neopets.com/moon/meteor.phtml',
 ];
 
 export function isAllowedOpenUrl(url: string): boolean {

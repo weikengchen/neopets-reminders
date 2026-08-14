@@ -14,6 +14,7 @@ import {
 } from './expellibox-observe.js';
 import { parseColtzan } from '../parsers/coltzan.js';
 import { parseExpellibox } from '../parsers/expellibox.js';
+import { parseMeteor } from '../parsers/meteor.js';
 import { GraveDangerWaiter } from './grave-danger-observe.js';
 import { HospitalReobserver } from './hospital-observe.js';
 import { parseHealingSprings } from '../parsers/healing-springs.js';
@@ -246,6 +247,14 @@ function run(): void {
       for (const d of diagnostics)
         console.info('[neopets-reminders]', 'coltzan', d);
       sendActivities(observations, { kind: 'coltzan' }, true);
+      return;
+    }
+
+    if (page.kind === 'meteor') {
+      const { observations, diagnostics } = parseMeteor(document, observedAt);
+      for (const d of diagnostics)
+        console.info('[neopets-reminders]', 'meteor', d);
+      sendActivities(observations, { kind: 'meteor' }, true);
       return;
     }
 

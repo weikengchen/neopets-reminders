@@ -12,6 +12,7 @@ export const COLTZAN_RESET_MINUTE_NST = 26;
 
 export const COLTZAN_COOLDOWN_MS = 13 * 60 * 60 * 1000;
 export const EXPELLIBOX_COOLDOWN_MS = (7 * 60 + 7) * 60 * 1000;
+export const METEOR_VISIT_COOLDOWN_MS = 60 * 60 * 1000;
 
 function partsInNst(ms: number): {
   year: number;
@@ -144,4 +145,29 @@ export function coltzanDueAtUtcMs(observedAt: number): number {
 
 export function expelliboxDueAtUtcMs(observedAt: number): number {
   return observedAt + EXPELLIBOX_COOLDOWN_MS;
+}
+
+/** Next 00:00 NST strictly after fromMs. */
+export function nextNstMidnightUtcMs(fromMs: number): number {
+  const p = partsInNst(fromMs);
+  let y = p.year;
+  let m = p.month;
+  let d = p.day;
+  let candidate = nstWallTimeToUtcMs(y, m, d, 0, 0, 0);
+  if (candidate <= fromMs) {
+    const next = addNstCalendarDays(y, m, d, 1);
+    y = next.year;
+    m = next.month;
+    d = next.day;
+    candidate = nstWallTimeToUtcMs(y, m, d, 0, 0, 0);
+  }
+  return candidate;
+}
+
+export function meteorVisitDueAtUtcMs(observedAt: number): number {
+  return observedAt + METEOR_VISIT_COOLDOWN_MS;
+}
+
+export function meteorPrizeDueAtUtcMs(observedAt: number): number {
+  return nextNstMidnightUtcMs(observedAt);
 }

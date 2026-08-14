@@ -94,6 +94,7 @@ function cardTitle(r: ReminderRecord): string {
   if (r.kind === 'healing-springs') return KIND_LABELS['healing-springs'];
   if (r.kind === 'coltzan') return KIND_LABELS.coltzan;
   if (r.kind === 'expellibox') return KIND_LABELS.expellibox;
+  if (r.kind === 'meteor') return KIND_LABELS.meteor;
   return r.subject;
 }
 
@@ -132,6 +133,7 @@ function renderSupport(): void {
     ['Healing Springs', canonicalUrlForKind('healing-springs')],
     ["Coltzan's Shrine", canonicalUrlForKind('coltzan')],
     ['Expellibox', canonicalUrlForKind('expellibox')],
+    ['Meteor Crash Site', canonicalUrlForKind('meteor')],
   ];
   for (const [label, url] of rows) {
     const li = document.createElement('li');

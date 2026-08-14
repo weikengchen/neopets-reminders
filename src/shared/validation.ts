@@ -34,6 +34,7 @@ const KINDS: readonly ReminderKind[] = [
   'healing-springs',
   'coltzan',
   'expellibox',
+  'meteor',
 ];
 
 const UI_STATUSES: readonly ActivityUiStatus[] = [
@@ -180,6 +181,9 @@ export function validateActivityObservation(
   if (typeof o.sourceNote === 'string' && o.sourceNote.trim()) {
     obs.sourceNote = o.sourceNote.trim().slice(0, 200);
   }
+  if (typeof o.prizeWonToday === 'boolean') {
+    obs.prizeWonToday = o.prizeWonToday;
+  }
   return obs;
 }
 
@@ -312,6 +316,9 @@ export function validateReminderRecord(value: unknown): ReminderRecord | null {
   }
   if (typeof r.sourceNote === 'string' && r.sourceNote.trim()) {
     record.sourceNote = r.sourceNote.trim().slice(0, 200);
+  }
+  if (typeof r.prizeWonToday === 'boolean') {
+    record.prizeWonToday = r.prizeWonToday;
   }
   if (r.notifiedGeneration !== undefined) {
     if (!isFiniteSafeNumber(r.notifiedGeneration)) return null;

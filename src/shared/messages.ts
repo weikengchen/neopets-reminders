@@ -50,6 +50,7 @@ export type SupportMatrix = {
   healingSprings: string;
   coltzan: string;
   expellibox: string;
+  meteor: string;
 };
 
 export const SUPPORT_MATRIX: SupportMatrix = {
@@ -65,6 +66,7 @@ export const SUPPORT_MATRIX: SupportMatrix = {
     'best-effort available/success/cooldown; 30m local estimate only',
   coltzan: 'best-effort; min(+13h, next ~12:26 NST) estimate',
   expellibox: 'best-effort; cooldown DOM or leave-after-visit +7h7m',
+  meteor: 'best-effort; +60m visit or next NST midnight after prize',
 };
 
 export function isPopupRequest(msg: unknown): msg is PopupRequest {
